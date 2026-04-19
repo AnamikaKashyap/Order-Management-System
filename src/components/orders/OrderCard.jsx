@@ -31,7 +31,7 @@ export default function OrderCard({ order, onDelete, onMarkComplete, onEdit, onV
 
   return (
     <Card
-      className="group relative cursor-pointer rounded-3xl border border-slate-200/80 bg-white p-4 shadow-sm transition duration-300 hover:border-indigo-200 hover:shadow-lg dark:border-slate-800 dark:bg-slate-950/90 dark:hover:border-slate-700"
+      className="group relative cursor-pointer rounded-3xl border border-slate-900/80 bg-white p-4 shadow-sm transition duration-300 hover:border-indigo-200 hover:shadow-lg dark:border-slate-800 dark:bg-slate-950/90 dark:hover:border-slate-700"
       onClick={handleCardClick}
     >
       <div className="absolute right-4 top-3">
@@ -46,25 +46,25 @@ export default function OrderCard({ order, onDelete, onMarkComplete, onEdit, onV
         <Link
           to={`/orders/${order.id}`}
           onClick={(event) => event.stopPropagation()}
-          className="block truncate pr-1 text-lg font-semibold leading-snug text-slate-900 transition hover:text-indigo-600 dark:text-slate-100 dark:hover:text-indigo-400"
+          className="block truncate pr-1 text-md font-medium leading-snug text-slate-900 transition hover:text-indigo-600 dark:text-slate-100 dark:hover:text-indigo-400"
           title={order.title || `Order #${order.id}`}
         >
           {order.title || `Order #${order.id}`}
         </Link>
 
-        <div className="break-all text-sm font-medium text-slate-500 dark:text-slate-400">
-          {order.id}
+        <div className="break-all text-sm font-medium text-slate-900 dark:text-slate-400">
+         Order Id : {order.id}
         </div>
 
-        <div className="break-words text-sm text-slate-600 dark:text-slate-300">
-          {customerName}
+        <div className="break-words text-sm text-slate-900 font-semibold dark:text-slate-300">
+          Customer Name : {customerName}
         </div>
 
         <div className="text-sm text-slate-500 dark:text-slate-400">
           {order.date || '-'}
         </div>
 
-        <div className="overflow-hidden pt-1">
+        <div className="overflow-hidden pt-1 pb-5">
           <StatusBadge status={order.status} />
         </div>
       </div>

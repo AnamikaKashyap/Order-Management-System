@@ -7,7 +7,6 @@ export default function CreateOrder(){
   const navigate = useNavigate()
 
   const handleSubmit = (data) => {
-    // ensure id
     const id = data.id && String(data.id).trim() ? data.id : `ORD${Date.now()}`
     const order = {
       id,
@@ -29,13 +28,12 @@ export default function CreateOrder(){
       console.error(e)
     }
 
-    // set session flag for Orders page toast
     sessionStorage.setItem('orderCreated', `Order ${id} created successfully`)
     navigate('/orders')
   }
 
   return (
-    <main>
+    <main className='p-6'>
       <h2>Create Order</h2>
       <OrderForm onSubmit={handleSubmit} />
     </main>

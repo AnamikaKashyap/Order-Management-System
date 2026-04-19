@@ -144,9 +144,10 @@ export default function ActivityPanel({ open, onClose, onNavigate }) {
   return (
     <div
       ref={panelRef}
-      className="fixed inset-x-3 top-20 z-50 rounded-3xl border border-slate-200/80 bg-white/95 p-3 shadow-2xl backdrop-blur dark:border-slate-700/80 dark:bg-slate-950/95 sm:absolute sm:right-0 sm:left-auto sm:top-full sm:mt-3 sm:w-[28rem]"
+      className="fixed inset-x-3 max-h-[500px]  overflow-y-auto top-20 z-50 rounded-3xl border border-slate-200/80 bg-white/95 p-3 shadow-2xl backdrop-blur dark:border-slate-700/80 dark:bg-slate-950/95 sm:absolute sm:right-0 sm:left-auto sm:top-full sm:mt-3 sm:w-[28rem]"
       role="dialog"
       aria-label="Activity panel"
+      style={{ scrollbarWidth: 'none'}}
     >
       <div className="mb-3 rounded-2xl border border-slate-200/70 bg-gradient-to-r from-slate-50 via-white to-blue-50 p-4 dark:border-slate-800 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
         <div className="flex items-start justify-between gap-3">
@@ -184,7 +185,7 @@ export default function ActivityPanel({ open, onClose, onNavigate }) {
         </div>
       </div>
 
-      <div className="max-h-[min(70vh,34rem)] space-y-4 overflow-y-auto pr-1">
+      <div className="max-h-[min(70vh,34rem)] space-y-4 overflow-y-auto pr-1" style={{ scrollbarWidth: 'none'}}>
         {Object.entries(groups).map(([label, list]) => (
           list.length === 0 ? null : (
             <div key={label}>

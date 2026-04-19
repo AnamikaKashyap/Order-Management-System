@@ -10,11 +10,6 @@ export default class ErrorBoundary extends React.Component {
     return { hasError: true, error }
   }
 
-  componentDidCatch(error, info) {
-    // Could log to external service here
-    // console.error(error, info)
-  }
-
   render() {
     if (this.state.hasError) {
       return (

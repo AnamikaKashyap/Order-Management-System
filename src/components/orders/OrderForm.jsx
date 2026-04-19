@@ -11,7 +11,8 @@ function SearchableSelect({ options = [], value, onChange, placeholder = 'Select
     <div className="relative">
       <div className="flex">
         <input 
-          className="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 text-slate-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-colors" 
+          className="w-full px-3 py-2 rounded bg-white dark:bg-gray-900 border border-black text-slate-100 focus:border-indigo-500 focus:ring-1 placeholder-black dark:placeholder-white
+ focus:ring-indigo-500 outline-none transition-colors" 
           value={value || ''} 
           onChange={(e)=>onChange(e.target.value)} 
           placeholder={placeholder} 
@@ -85,87 +86,140 @@ export default function OrderForm({ onSubmit, initial = {} }){
   }
 
   return (
-    <form onSubmit={submit} className="bg-slate-800 p-6 rounded-lg border border-slate-700 shadow-sm space-y-8 mt-4">
+    <form onSubmit={submit} className="bg-gray-100 dark:bg-[#121214] p-6 lg:p-8 rounded-3xl border border-slate-900/80 dark:border-white/5 shadow-md dark:shadow-none space-y-8 mt-4 transition-colors duration-300">
       {/* Order Info Section */}
       <div>
-        <h3 className="text-lg font-semibold text-white mb-4 pb-2 border-b border-slate-700 flex items-center justify-between">
+        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 pb-4 border-b border-slate-200 dark:border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 tracking-tight">
           <span>Order Information</span>
-          <span className="text-sm font-normal text-slate-400 bg-slate-900 px-3 py-1 rounded border border-slate-700">ID: <span className="font-mono text-indigo-400 font-medium">{data.id}</span></span>
+          <span className="text-xs font-bold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-white/5 px-3.5 py-1.5 rounded-full border border-slate-900/80 dark:border-white/10 w-fit">
+            ID: <span className="font-mono text-indigo-600 dark:text-indigo-400">{data.id}</span>
+          </span>
         </h3>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-slate-300 mb-1">Order Title <span className="text-red-400">*</span></label>
-            <Input value={data.title} onChange={e=>handleChange('title', e.target.value)} className={`bg-slate-900 border-slate-700 text-slate-100 ${errors.title ? 'border-red-500 focus:border-red-500' : 'focus:border-indigo-500'}`} placeholder="e.g. MacBook Pro 16-inch" />
-            {errors.title && <div className="text-red-400 text-xs mt-1.5">{errors.title}</div>}
+            <label className="block text-sm font-semibold text-slate-900 dark:text-slate-300 mb-1.5">Order Title <span className="text-red-500 dark:text-red-400">*</span></label>
+            <Input 
+              value={data.title} 
+              onChange={e => handleChange('title', e.target.value)} 
+              className={`w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-[#18181b] text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all shadow-sm dark:shadow-none border ${errors.title ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' : 'border-slate-900/80 dark:border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40'}`} 
+              placeholder="e.g. MacBook Pro 16-inch" 
+            />
+            {errors.title && <div className="text-red-500 dark:text-red-400 text-xs font-medium mt-1.5">{errors.title}</div>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Date <span className="text-red-400">*</span></label>
-            <Input type="date" value={data.date} onChange={e=>handleChange('date', e.target.value)} className={`bg-slate-900 border-slate-700 text-slate-100 ${errors.date ? 'border-red-500' : 'focus:border-indigo-500'}`} />
-            {errors.date && <div className="text-red-400 text-xs mt-1.5">{errors.date}</div>}
+            <label className="block text-sm font-semibold text-black dark:text-slate-300 mb-1.5">Date <span className="text-red-500 dark:text-red-400">*</span></label>
+            <Input 
+              type="date" 
+              value={data.date} 
+              onChange={e => handleChange('date', e.target.value)} 
+              className={`w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-[#18181b] text-slate-900 dark:text-slate-100 outline-none transition-all shadow-sm dark:shadow-none border ${errors.date ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' : 'border-slate-900/80 dark:border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40'}`} 
+            />
+            {errors.date && <div className="text-red-500 dark:text-red-400 text-xs font-medium mt-1.5">{errors.date}</div>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Total Amount (₹)</label>
-            <Input type="number" value={data.total} onChange={e=>handleChange('total', e.target.value)} className={`bg-slate-900 border-slate-700 text-slate-100 ${errors.total ? 'border-red-500' : 'focus:border-indigo-500'}`} placeholder="0.00" />
-            {errors.total && <div className="text-red-400 text-xs mt-1.5">{errors.total}</div>}
+            <label className="block text-sm font-semibold text-black dark:text-slate-300 mb-1.5">Total Amount (₹)</label>
+            <Input 
+              type="number" 
+              value={data.total} 
+              onChange={e => handleChange('total', e.target.value)} 
+              className={`w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-[#18181b] text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all shadow-sm dark:shadow-none border ${errors.total ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' : 'border-slate-900/80 dark:border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40'}`} 
+              placeholder="0.00" 
+            />
+            {errors.total && <div className="text-red-500 dark:text-red-400 text-xs font-medium mt-1.5">{errors.total}</div>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Status <span className="text-red-400">*</span></label>
-            <select value={data.status} onChange={e=>handleChange('status', e.target.value)} className={`w-full px-3 py-2 rounded bg-slate-900 border ${errors.status ? 'border-red-500' : 'border-slate-700'} text-slate-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-colors`}>
+            <label className="block text-sm font-semibold text-black dark:text-slate-300 mb-1.5">Status <span className="text-red-500 dark:text-red-400">*</span></label>
+            <select 
+              value={data.status} 
+              onChange={e => handleChange('status', e.target.value)} 
+              className={`w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-[#18181b] text-slate-900 dark:text-slate-100 outline-none transition-all shadow-sm dark:shadow-none border ${errors.status ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' : 'border-slate-900/80 dark:border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40'}`}
+            >
               <option value="pending">Pending</option>
               <option value="in-progress">In Progress</option>
               <option value="completed">Completed</option>
               <option value="cancelled">Cancelled</option>
             </select>
-            {errors.status && <div className="text-red-400 text-xs mt-1.5">{errors.status}</div>}
+            {errors.status && <div className="text-red-500 dark:text-red-400 text-xs font-medium mt-1.5">{errors.status}</div>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Priority <span className="text-red-400">*</span></label>
-            <select value={data.priority} onChange={e=>handleChange('priority', e.target.value)} className={`w-full px-3 py-2 rounded bg-slate-900 border ${errors.priority ? 'border-red-500' : 'border-slate-700'} text-slate-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-colors`}>
+            <label className="block text-sm font-semibold text-black dark:text-slate-300 mb-1.5">Priority <span className="text-red-500 dark:text-red-400">*</span></label>
+            <select 
+              value={data.priority} 
+              onChange={e => handleChange('priority', e.target.value)} 
+              className={`w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-[#18181b] text-slate-900 dark:text-slate-100 outline-none transition-all shadow-sm dark:shadow-none border ${errors.priority ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' : 'border-slate-900/80 dark:border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40'}`}
+            >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
-            {errors.priority && <div className="text-red-400 text-xs mt-1.5">{errors.priority}</div>}
+            {errors.priority && <div className="text-red-500 dark:text-red-400 text-xs font-medium mt-1.5">{errors.priority}</div>}
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-slate-300 mb-1">Assign To</label>
-            <SearchableSelect options={assignees} value={data.assignedTo} onChange={(v)=>handleChange('assignedTo', v)} placeholder="Select team member..." />
+            <label className="block text-sm font-semibold text-slate-900 dark:text-slate-300 mb-1.5">Assign To</label>
+            <SearchableSelect 
+              options={assignees} 
+              value={data.assignedTo} 
+              onChange={(v) => handleChange('assignedTo', v)} 
+              placeholder="Select team member..." 
+            />
           </div>
         </div>
       </div>
 
       {/* Customer Info Section */}
-      <div>
-        <h3 className="text-lg font-semibold text-white mb-4 pb-2 border-b border-slate-700">Customer Information</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="pt-2">
+        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 pb-4 border-b border-slate-200 dark:border-white/10 tracking-tight">
+          Customer Information
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-slate-300 mb-1">Customer Name <span className="text-red-400">*</span></label>
-            <Input value={data.customerName} onChange={e=>handleChange('customerName', e.target.value)} className={`bg-slate-900 border-slate-700 text-slate-100 ${errors.customerName ? 'border-red-500' : 'focus:border-indigo-500'}`} placeholder="John Doe" />
-            {errors.customerName && <div className="text-red-400 text-xs mt-1.5">{errors.customerName}</div>}
+            <label className="block text-sm font-semibold text-black dark:text-slate-300 mb-1.5">Customer Name <span className="text-red-500 dark:text-red-400">*</span></label>
+            <Input 
+              value={data.customerName} 
+              onChange={e => handleChange('customerName', e.target.value)} 
+              className={`w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-[#18181b] text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all shadow-sm dark:shadow-none border ${errors.customerName ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' : 'border-slate-900/80 dark:border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40'}`} 
+              placeholder="John Doe" 
+            />
+            {errors.customerName && <div className="text-red-500 dark:text-red-400 text-xs font-medium mt-1.5">{errors.customerName}</div>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Email Address <span className="text-red-400">*</span></label>
-            <Input type="email" value={data.customerEmail} onChange={e=>handleChange('customerEmail', e.target.value)} className={`bg-slate-900 border-slate-700 text-slate-100 ${errors.customerEmail ? 'border-red-500' : 'focus:border-indigo-500'}`} placeholder="john@example.com" />
-            {errors.customerEmail && <div className="text-red-400 text-xs mt-1.5">{errors.customerEmail}</div>}
+            <label className="block text-sm font-semibold text-black dark:text-slate-300 mb-1.5">Email Address <span className="text-red-500 dark:text-red-400">*</span></label>
+            <Input 
+              type="email" 
+              value={data.customerEmail} 
+              onChange={e => handleChange('customerEmail', e.target.value)} 
+              className={`w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-[#18181b] text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all shadow-sm dark:shadow-none border ${errors.customerEmail ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' : 'border-slate-900/80 dark:border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40'}`} 
+              placeholder="john@example.com" 
+            />
+            {errors.customerEmail && <div className="text-red-500 dark:text-red-400 text-xs font-medium mt-1.5">{errors.customerEmail}</div>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Phone Number <span className="text-red-400">*</span></label>
-            <Input type="tel" value={data.customerPhone} onChange={e=>handleChange('customerPhone', e.target.value)} className={`bg-slate-900 border-slate-700 text-slate-100 ${errors.customerPhone ? 'border-red-500' : 'focus:border-indigo-500'}`} placeholder="10-digit number" />
-            {errors.customerPhone && <div className="text-red-400 text-xs mt-1.5">{errors.customerPhone}</div>}
+            <label className="block text-sm font-semibold text-black dark:text-slate-300 mb-1.5">Phone Number <span className="text-red-500 dark:text-red-400">*</span></label>
+            <Input 
+              type="tel" 
+              value={data.customerPhone} 
+              onChange={e => handleChange('customerPhone', e.target.value)} 
+              className={`w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-[#18181b] text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all shadow-sm dark:shadow-none border ${errors.customerPhone ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' : 'border-slate-900/80 dark:border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40'}`} 
+              placeholder="10-digit number" 
+            />
+            {errors.customerPhone && <div className="text-red-500 dark:text-red-400 text-xs font-medium mt-1.5">{errors.customerPhone}</div>}
           </div>
         </div>
       </div>
 
-      <div className="pt-6 border-t border-slate-700 flex justify-end">
-        <Button type="submit" className="px-8 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md font-medium transition-colors">
+      <div className="pt-8 mt-4 border-t border-slate-200 dark:border-white/10 flex justify-end">
+        <Button 
+          type="submit" 
+          className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold shadow-md hover:shadow-lg transition-all active:scale-95 w-full sm:w-auto"
+        >
           Save Order
         </Button>
       </div>

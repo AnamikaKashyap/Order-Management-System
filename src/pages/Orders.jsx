@@ -27,7 +27,6 @@ export default function Orders() {
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
 
-  // simulate initial API load
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false)
@@ -71,9 +70,8 @@ export default function Orders() {
           case 'past_90_days':
             return new Date(todayStart.getTime() - 90 * 24 * 60 * 60 * 1000)
           case 'this_week': {
-            // week start Monday
-            const day = now.getDay() // 0 (Sun) - 6 (Sat)
-            const offset = (day + 6) % 7 // days since Monday
+            const day = now.getDay() 
+            const offset = (day + 6) % 7 
             return new Date(todayStart.getTime() - offset * 24 * 60 * 60 * 1000)
           }
           case 'this_month':
@@ -98,7 +96,6 @@ export default function Orders() {
     )
   })
 
-  // debounce searchInput -> query
   React.useEffect(() => {
     const t = setTimeout(() => setQuery(searchInput), 300)
     return () => clearTimeout(t)
@@ -144,12 +141,10 @@ export default function Orders() {
     })
   }
   
-  // persist items to localStorage
   React.useEffect(()=>{
     try{ localStorage.setItem('orders', JSON.stringify(items)) }catch{ /* ignore storage write errors */ }
   },[items])
 
-  // show toast if created via CreateOrder page
   React.useEffect(()=>{
     const m = sessionStorage.getItem('orderCreated')
     if (m){
@@ -193,7 +188,7 @@ export default function Orders() {
       <div className="mx-auto max-w-[90rem] space-y-5">
         
         {/* Header & Controls Area */}
-        <div className="space-y-4 overflow-hidden rounded-3xl border border-slate-300/80 bg-white p-4 shadow-md dark:border-white/5 dark:bg-[#121214] dark:shadow-none lg:p-5">
+        <div className="space-y-4 overflow-hidden rounded-3xl border border-slate-900/80 bg-white p-4 shadow-md dark:border-white/5 dark:bg-[#121214] dark:shadow-none lg:p-5">
           
           <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_auto] xl:items-end">
             
@@ -201,7 +196,7 @@ export default function Orders() {
             <div className="grid min-w-0 gap-3 lg:grid-cols-[minmax(0,1.2fr)_repeat(3,minmax(0,0.7fr))]">
               
               <div className="relative min-w-0">
-                <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wider block">
+                <label className="text-[11px] font-bold text-slate-900 dark:text-slate-400 mb-1.5 uppercase tracking-wider block">
                   Search Orders
                 </label>
                 <div className="relative">
@@ -209,7 +204,7 @@ export default function Orders() {
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
                     placeholder="Search by id, title..."
-                    className="w-full pl-4 pr-10 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 outline-none transition-all text-sm font-medium"
+                    className="w-full pl-4 pr-10 py-2.5 rounded-xl bg-slate-200 dark:bg-white/5 border border-slate-500 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 outline-none transition-all text-sm font-medium"
                   />
                   {searchInput && (
                     <button 
@@ -224,33 +219,33 @@ export default function Orders() {
 
               <div className="contents">
                 <div className="flex min-w-0 flex-col">
-                  <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wider">Status</label>
+                  <label className="text-[11px] font-bold text-slate-900 dark:text-slate-400 mb-1.5 uppercase tracking-wider">Status</label>
                   <select 
                     value={status} 
                     onChange={(e) => setStatus(e.target.value)} 
-                    className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-indigo-500/50 outline-none transition-all cursor-pointer capitalize"
+                    className="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-500 dark:border-white/10 text-slate-700 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-indigo-500/50 outline-none transition-all cursor-pointer capitalize"
                   >
                     {statuses.map((s) => <option value={s} key={s} className="bg-white dark:bg-[#18181b]">{s}</option>)}
                   </select>
                 </div>
 
                 <div className="flex min-w-0 flex-col">
-                  <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wider">Priority</label>
+                  <label className="text-[11px] font-bold text-slate-900 dark:text-slate-900 mb-1.5 uppercase tracking-wider">Priority</label>
                   <select 
                     value={priority} 
                     onChange={(e) => setPriority(e.target.value)} 
-                    className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-indigo-500/50 outline-none transition-all cursor-pointer capitalize"
+                    className="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-500 dark:border-white/10 text-slate-700 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-indigo-500/50 outline-none transition-all cursor-pointer capitalize"
                   >
                     {priorities.map((p) => <option value={p} key={p} className="bg-white dark:bg-[#18181b]">{p}</option>)}
                   </select>
                 </div>
 
                 <div className="flex min-w-0 flex-col">
-                  <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wider">Date</label>
+                  <label className="text-[11px] font-bold text-slate-900 dark:text-slate-400 mb-1.5 uppercase tracking-wider">Date</label>
                   <select 
                     value={datePreset} 
                     onChange={(e) => setDatePreset(e.target.value)} 
-                    className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-indigo-500/50 outline-none transition-all cursor-pointer"
+                    className="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-500 dark:border-white/10 text-slate-700 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-indigo-500/50 outline-none transition-all cursor-pointer"
                   >
                     {Object.entries(DATE_PRESET_LABELS).map(([k,v]) => <option value={k} key={k} className="bg-white dark:bg-[#18181b]">{v}</option>)}
                   </select>
@@ -265,7 +260,7 @@ export default function Orders() {
                   <button 
                     key={v}
                     onClick={() => setView(v)} 
-                      className={`flex-1 rounded-lg px-3 py-2 text-xs font-semibold capitalize transition-all duration-200 xl:flex-none xl:px-4 ${view === v ? 'border border-slate-200/50 bg-white text-indigo-600 shadow-sm dark:border-white/5 dark:bg-[#1c1c1f] dark:text-indigo-400' : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'}`}
+                      className={`flex-1 rounded-lg px-3 py-2 text-xs font-semibold capitalize transition-all duration-200 xl:flex-none xl:px-4 ${view === v ? 'border border-slate-900/50 bg-white text-indigo-600 shadow-sm dark:border-white/5 dark:bg-[#1c1c1f] dark:text-indigo-400' : 'text-slate-900 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'}`}
                   >
                     {v}
                   </button>
@@ -388,13 +383,13 @@ export default function Orders() {
                   {columns.map((col) => (
                     <div 
                       key={col.key} 
-                      className="flex min-h-[340px] min-w-0 flex-col rounded-3xl border border-slate-200/80 bg-slate-100/50 p-4 shadow-sm transition-colors dark:border-white/5 dark:bg-[#121214]"
+                      className="flex min-h-[340px] min-w-0 flex-col rounded-3xl border border-slate-600/80 bg-slate-100/50 p-4 shadow-sm transition-colors dark:border-white/5 dark:bg-[#121214]"
                       onDragOver={(e) => e.preventDefault()}
                       onDrop={(e) => handleDrop(e, col.key)}
                     >
                       <div className="flex items-center justify-between mb-4 px-2">
-                        <div className="font-extrabold text-slate-800 dark:text-slate-100 uppercase tracking-wider text-sm">{col.title}</div>
-                        <div className="bg-white dark:bg-white/10 text-slate-700 dark:text-slate-300 px-2.5 py-0.5 rounded-full text-xs font-bold shadow-sm">
+                        <div className="font-bold text-slate-800 dark:text-slate-100 uppercase tracking-wider text-sm">{col.title}</div>
+                        <div className="bg-white border border-black dark:bg-white/10 text-slate-700 dark:text-slate-300 px-2.5 py-0.5 rounded-full text-xs font-bold shadow-sm">
                           {grouped[col.key]?.length || 0}
                         </div>
                       </div>

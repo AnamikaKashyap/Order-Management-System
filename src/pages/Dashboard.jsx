@@ -69,14 +69,14 @@ export default function Dashboard() {
   }
 
   return (
-  <div className="min-h-screen bg-slate-50 dark:bg-[#09090b] p-4 lg:p-6 font-sans text-slate-900 dark:text-slate-100 transition-colors duration-300">
+  <div className="min-h-screen bg-slate-50 dark:bg-black p-4 lg:p-6 font-sans text-slate-900 dark:text-slate-100 transition-colors duration-300">
     
     <style>{`
       .hide-scrollbar::-webkit-scrollbar { display: none; }
       .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     `}</style>
 
-    <div className="max-w-[90rem] mx-auto space-y-5">
+    <div className="max-w-[90rem] mx-auto ">
       
       {/* Header */}
       <div className="flex items-end justify-between">
@@ -91,7 +91,7 @@ export default function Dashboard() {
       </div>
 
       {/* Stats Section */}
-      <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 hide-scrollbar -mx-4 px-4 lg:mx-0 lg:px-0">
+      <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 my-4 pb-2 hide-scrollbar mx-0 px-4 lg:mx-0 lg:px-0">
         {loading ? (
           Array.from({ length: 5 }).map((_, i) => (
             <Skeleton key={i} className="min-w-[260px] h-[110px] rounded-2xl shrink-0" />
