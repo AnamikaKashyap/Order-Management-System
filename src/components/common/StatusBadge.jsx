@@ -7,16 +7,21 @@ const mapStyle = {
   cancelled: 'bg-rose-100 text-rose-800'
 }
 
-export default function StatusBadge({ status }){
+const mapIcon = {
+  pending: '⏳',
+  'in-progress': '🔵',
+  completed: '✅',
+  cancelled: '⛔'
+}
+
+export default function StatusBadge({ status }) {
   const s = status || 'pending'
   const cls = mapStyle[s] || 'bg-slate-100 text-slate-800'
+
   return (
-    <span className={`px-3 py-1 text-xs rounded-full ${cls} font-medium flex items-center gap-2` }>
-      {s === 'pending' && <span className="animate-pulse">⏳</span>}
-      {s === 'in-progress' && <span>🔵</span>}
-      {s === 'completed' && <span>✅</span>}
-      {s === 'cancelled' && <span>⛔</span>}
-      <span className="capitalize">{s.replace('-', ' ')}</span>
+    <span className={`inline-flex flex-nowrap items-center gap-2 whitespace-nowrap rounded-full px-3 py-1 text-xs font-medium ${cls}`}>
+      <span>{mapIcon[s] || '•'}</span>
+      <span className="whitespace-nowrap capitalize">{s.replace('-', ' ')}</span>
     </span>
   )
 }
