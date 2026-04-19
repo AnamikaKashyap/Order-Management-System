@@ -260,7 +260,7 @@ export default function Orders() {
                   <button 
                     key={v}
                     onClick={() => setView(v)} 
-                      className={`flex-1 rounded-lg px-3 py-2 text-xs font-semibold capitalize transition-all duration-200 xl:flex-none xl:px-4 ${view === v ? 'border border-slate-900/50 bg-white text-indigo-600 shadow-sm dark:border-white/5 dark:bg-[#1c1c1f] dark:text-indigo-400' : 'text-slate-900 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'}`}
+                      className={`flex-1 cursor-pointer rounded-lg px-3 py-2 text-xs font-semibold capitalize transition-all duration-200 xl:flex-none xl:px-4 ${view === v ? 'border border-slate-900/50 bg-white text-indigo-600 shadow-sm dark:border-white/5 dark:bg-[#1c1c1f] dark:text-indigo-400' : 'text-slate-900 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'}`}
                   >
                     {v}
                   </button>

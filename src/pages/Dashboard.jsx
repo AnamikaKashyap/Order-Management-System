@@ -4,9 +4,17 @@ import { orders } from '../data/orders'
 import StatCard from '../components/common/StatCard'
 import OrderCard from '../components/orders/OrderCard'
 import Skeleton from '../components/common/Skeleton'
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(true)
+
+  const navigate = useNavigate();
+
+  const redirectToOrders = () => {
+    navigate('/orders');
+  };
+
 
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 800)
@@ -206,7 +214,7 @@ export default function Dashboard() {
                   <div className="text-6xl font-black tracking-tighter text-white drop-shadow-lg">{highPriority}</div>
                   <div className="text-xs font-bold text-indigo-50 leading-relaxed flex-1">High priority orders require immediate attention.</div>
                 </div>
-                <button className="mt-5 w-full bg-white text-indigo-700 text-sm font-bold py-3 px-4 rounded-xl shadow-md hover:bg-slate-50 transition-transform active:scale-95">
+                <button className="mt-5 w-full bg-white text-indigo-700 text-sm font-bold py-3 px-4 rounded-xl shadow-md hover:bg-transparent hover:text-white hover:border hover:border-white hover:shadow-nonetransition-transform active:scale-95 cursor-pointer" onClick={redirectToOrders}>
                   Review Orders
                 </button>
              </div>
