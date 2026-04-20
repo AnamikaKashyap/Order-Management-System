@@ -379,11 +379,11 @@ export default function Orders() {
               }, {})
 
               return (
-                <div className="grid gap-4 xl:grid-cols-4">
+                <div className="flex gap-4 overflow-x-auto pb-4 hide-scrollbar">
                   {columns.map((col) => (
                     <div 
-                      key={col.key} 
-                      className="flex min-h-[340px] min-w-0 flex-col rounded-3xl border border-slate-600/80 bg-slate-100/50 p-4 shadow-sm transition-colors dark:border-white/5 dark:bg-[#121214]"
+  key={col.key} 
+  className="flex min-h-[340px] w-max min-w-[300px] shrink-0 flex-col rounded-3xl border border-slate-600/80 bg-slate-100/50 p-4 shadow-sm transition-colors dark:border-white/5 dark:bg-[#121214]"
                       onDragOver={(e) => e.preventDefault()}
                       onDrop={(e) => handleDrop(e, col.key)}
                     >
