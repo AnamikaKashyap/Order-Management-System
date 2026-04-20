@@ -106,7 +106,7 @@ export default function OrderDetail() {
       const items = raw ? JSON.parse(raw) : sampleOrders
       const newItems = items.map((entry) => (entry.id === updatedOrder.id ? updatedOrder : entry))
       localStorage.setItem('orders', JSON.stringify(newItems))
-    } catch (e) {}
+    } catch (e) { }
   }
 
   const applyStatus = () => {
@@ -232,7 +232,10 @@ export default function OrderDetail() {
 
                       <button
                         onClick={() => setEditOpen(true)}
-                        className="inline-flex items-center gap-2 rounded-2xl bg-indigo-600 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-indigo-600/20 transition hover:-translate-y-0.5 hover:bg-indigo-500 dark:shadow-indigo-950/50"
+                        className="group inline-flex cursor-pointer items-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-bold text-white transition-all duration-500 active:scale-95 shadow-lg shadow-indigo-600/20
+    bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 bg-[length:200%_auto]
+    hover:bg-right hover:-translate-y-0.5 hover:shadow-indigo-500/40
+    dark:from-indigo-500 dark:via-purple-500 dark:to-sky-400 dark:shadow-indigo-950/50"
                       >
                         Edit Order
                         <ArrowRight className="h-4 w-4" />
@@ -427,7 +430,10 @@ export default function OrderDetail() {
                     <div className="mt-3 flex justify-end">
                       <button
                         onClick={addNote}
-                        className="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
+                        className="group inline-flex cursor-pointer items-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-bold text-white transition-all duration-500 active:scale-95 shadow-lg
+    bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 bg-[length:200%_auto]
+    hover:bg-right hover:-translate-y-0.5 hover:shadow-indigo-500/20
+    dark:from-indigo-600 dark:via-purple-600 dark:to-indigo-600 dark:shadow-indigo-500/10"
                       >
                         Save Note
                         <ArrowRight className="h-4 w-4" />

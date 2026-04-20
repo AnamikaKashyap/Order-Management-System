@@ -5,7 +5,7 @@ import { useTheme } from '../../context/ThemeContext'
 import { Bell, Moon, Sun } from "lucide-react";
 import { readNotifications } from '../../utils/notifications'
 
-export default function Header({ toggleSidebar }){
+export default function Header({ toggleSidebar }) {
   const navigate = useNavigate()
   const [open, setOpen] = React.useState(false)
   const [unread, setUnread] = React.useState(0)
@@ -13,13 +13,13 @@ export default function Header({ toggleSidebar }){
   const { theme, toggleTheme } = useTheme();
 
   const updateUnread = () => {
-    try{
+    try {
       const arr = readNotifications()
-      setUnread(arr.filter(i=>!i.read).length)
-    }catch{ setUnread(0) }
+      setUnread(arr.filter(i => !i.read).length)
+    } catch { setUnread(0) }
   }
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     updateUnread()
     window.addEventListener('storage', updateUnread)
     return () => window.removeEventListener('storage', updateUnread)
@@ -38,7 +38,7 @@ export default function Header({ toggleSidebar }){
   return (
     <header className="fixed top-0 left-0 right-0 z-40 h-16 border-b border-gray-200 bg-white text-slate-900 transition-colors dark:border-gray-800 dark:bg-[#121214] dark:text-white">
       <div className="w-full mx-auto h-full flex items-center justify-between px-4 md:px-6">
-        
+
         {/* Left Side: Sidebar Toggle & Branding */}
         <div className="flex items-center gap-4">
           <button
@@ -54,7 +54,7 @@ export default function Header({ toggleSidebar }){
           <div className="h-9 w-9 bg-slate-900 text-white rounded-lg flex items-center justify-center font-bold dark:bg-white dark:text-black">
             OM
           </div>
-          
+
           <div className="hidden sm:block">
             <div className="text-[10px] uppercase tracking-[0.2em] font-bold opacity-50">Welcome to</div>
             <div className="text-sm font-bold tracking-tight">Order Management System</div>
@@ -64,8 +64,11 @@ export default function Header({ toggleSidebar }){
         {/* Right Side: Actions & Profile */}
         <div className="flex items-center gap-3">
 
-          <button 
-            className="hidden sm:inline-flex items-center cursor-pointer bg-slate-900 text-white px-4 py-1.5 rounded-md text-sm font-bold hover:bg-slate-800 transition-all dark:bg-white dark:text-black dark:hover:bg-gray-200"
+          <button
+            className="hidden sm:inline-flex items-center cursor-pointer px-5 py-2 rounded-xl text-sm font-bold text-white transition-all duration-500 active:scale-95 shadow-lg
+    bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-[length:200%_auto]
+    hover:bg-right hover:shadow-indigo-500/40 hover:-translate-y-0.5
+    dark:from-indigo-500 dark:via-purple-500 dark:to-pink-500 dark:hover:shadow-purple-500/30"
             onClick={renderForm}
           >
             New Order
@@ -74,12 +77,11 @@ export default function Header({ toggleSidebar }){
           {/* Notifications */}
           <div className="relative inline-block">
             <button
-              onClick={()=>setOpen(v=>!v)}
-              className={`relative rounded-md border p-2 cursor-pointer transition-all ${
-                open
+              onClick={() => setOpen(v => !v)}
+              className={`relative rounded-md border p-2 cursor-pointer transition-all ${open
                   ? 'bg-slate-100 border-slate-300 dark:bg-white/10 dark:border-gray-600'
                   : 'border-gray-200 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-white/5'
-              }`}
+                }`}
             >
               <Bell className="h-4 w-4 cursor-pointer" strokeWidth={2} />
               {unread > 0 && (
@@ -88,7 +90,7 @@ export default function Header({ toggleSidebar }){
                 </span>
               )}
             </button>
-            <ActivityPanel open={open} onClose={()=>setOpen(false)} onNavigate={handleNavigate} />
+            <ActivityPanel open={open} onClose={() => setOpen(false)} onNavigate={handleNavigate} />
           </div>
 
           {/* Theme Toggle */}
